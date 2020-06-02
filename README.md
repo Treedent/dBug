@@ -1,4 +1,4 @@
-<div style="color:red">
+```php
             dddddddd                                                         
             d::::::dBBBBBBBBBBBBBBBBB                                         
             d::::::dB::::::::::::::::B                                        
@@ -23,7 +23,7 @@ d::::::ddddd::::::ddBB:::::BBBBBB::::::Bu:::::::::::::::uug:::::::ggggg:::::g
                                                             gg:::::::::::::g  
                                                               ggg::::::ggg    
                                                                  gggggg
-</div>
+```
 
 dBug is a simple php 7.1+ class to debug PHP variables such as :
 ================================================================
