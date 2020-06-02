@@ -28,13 +28,13 @@ d::::::ddddd::::::ddBB:::::BBBBBB::::::Bu:::::::::::::::uug:::::::ggggg:::::g
 dBug is a simple php 7.1+ class to debug PHP variables such as :
 ================================================================
 
--   [String](#string)
--   [Number](#numeric)
--   [Boolean](#boolean)
--   [Null](#null)
--   [Array](#array)
--   [Mysql Query Single Result](#string)
--   [Mysql Query Multiple Results](#string)
+-   [String](#string-variable)
+-   [Number](#numeric-variable)
+-   [Boolean](#boolean-variable)
+-   [Null](#null-variable)
+-   [Array](#array-variable)
+-   [Mysql Query Single Result](#mysql-query-single-result)
+-   [Mysql Query Multiple Results](#mysql-query-multiple-results)
 -   [Object](#object)
 -   [JSON](#json)
 -   [XML](#xml)
@@ -56,7 +56,9 @@ String variable
     new Dbg\dBug2($string);
 ?>
 ```
+![dBug String](./imgs/string1.png  "dBug empty String")
 
+![dBug String](./imgs/string2.png  "dBug String")
 
 [↑ Top](#top)
 
@@ -74,12 +76,15 @@ Numeric variable
     new Dbg\dBug2($doubleVariable);
 ?>
 ```
+![dBug Integer](./imgs/integer.png  "dBug integer")
+
+![dBug Double](./imgs/double.png  "dBug double")
 
 [↑ Top](#top)
 
 * * * * *
 
-Boolean variable {.boolean}
+Boolean variable
 ----------------
 
 ``` {.code}
@@ -96,7 +101,7 @@ Boolean variable {.boolean}
 
 * * * * *
 
-Null variable {.null}
+Null variable
 -------------
 
 ``` {.code}
@@ -110,7 +115,7 @@ Null variable {.null}
 
 * * * * *
 
-Array variable {.array}
+Array variable
 --------------
 
 ``` {.code}
@@ -127,7 +132,7 @@ Array variable {.array}
 
 * * * * *
 
-Mysql Query Single Result Array {.array}
+Mysql Query Single Result Array
 -------------------------------
 
 ``` {.code}
@@ -146,7 +151,7 @@ Mysql Query Single Result Array {.array}
 
 * * * * *
 
-Mysql Results Object {.resource}
+Mysql Results Object
 --------------------
 
 ``` {.code}
@@ -165,7 +170,7 @@ Mysql Results Object {.resource}
 
 * * * * *
 
-Object variable {.object}
+Object variable
 ---------------
 
 ``` {.code}
@@ -187,7 +192,7 @@ Object variable {.object}
 
 * * * * *
 
-JSON {#json}
+JSON
 ----
 
 ``` {.code}
@@ -201,7 +206,7 @@ JSON {#json}
 
 * * * * *
 
-PostgreSQL resource {#resource}
+PostgreSQL resource
 -------------------
 
 ``` {.code}
@@ -216,7 +221,7 @@ PostgreSQL resource {#resource}
 
 * * * * *
 
-XML variable {#xml}
+XML variable
 ------------
 
 Force type with second parameter 'xml'
@@ -233,7 +238,7 @@ Force type with second parameter 'xml'
 
 * * * * *
 
-GD Image resource {.resource}
+GD Image resource
 -----------------
 
 ``` {.code}
@@ -250,7 +255,7 @@ GD Image resource {.resource}
 
 * * * * *
 
-Exif Image information {.array}
+Exif Image information
 ----------------------
 
 ``` {.code}
