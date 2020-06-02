@@ -160,6 +160,7 @@ Mysql Query Single Result Array
 
 Mysql Results Object
 --------------------
+Force type with second parameter 'mysql'
 
 ```php
 <?php
@@ -203,6 +204,7 @@ Object variable
 
 JSON
 ----
+Force type with second parameter 'json'
 
 ```php
 <?php
@@ -272,6 +274,8 @@ GD Image resource
 
 Exif Image information
 ----------------------
+
+Force type with second parameter 'image'
 
 ```php
 <?php
