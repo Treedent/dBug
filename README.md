@@ -33,14 +33,14 @@ dBug is a simple php 7.1+ class to debug PHP variables such as :
 -   [Boolean](#boolean-variable)
 -   [Null](#null-variable)
 -   [Array](#array-variable)
--   [Mysql Query Single Result](#mysql-query-single-result)
--   [Mysql Query Multiple Results](#mysql-query-multiple-results)
--   [Object](#object)
+-   [Mysql Query Single Result](#mysql-query-single-result-array)
+-   [Mysql Query Multiple Results](#mysql-results-object)
+-   [Object](#object-variable)
 -   [JSON](#json)
--   [XML](#xml)
--   [PostegreSQL resource](#postgresql-resource-resource)
--   [GD Image resource](#gdimage)
--   [Exif Image information](#exif)
+-   [XML](#xml-variable)
+-   [PostegreSQL resource](#postgresql-resource)
+-   [GD Image resource](#gd-image-resource)
+-   [Exif Image information](#exif-image-information)
 
 * * * * *
 
@@ -97,6 +97,10 @@ Boolean variable
 ?>
 ```
 
+![dBug Boolean](./imgs/true.png  "dBug boolean")
+
+![dBug Integer](./imgs/false.png  "dBug boolean")
+
 [↑ Top](#top)
 
 * * * * *
@@ -110,6 +114,7 @@ Null variable
     new Dbg\dBug2($nullVariable);
 ?>
 ```
+![dBug NULL](./imgs/null.png  "dBug null")
 
 [↑ Top](#top)
 
@@ -127,6 +132,7 @@ Array variable
     new Dbg\dBug2($myArray);
 ?>
 ```
+![dBug Array](./imgs/array.png  "dBug array")
 
 [↑ Top](#top)
 
@@ -146,6 +152,7 @@ Mysql Query Single Result Array
     mysqli_close($dblink);
 ?>
 ```
+![dBug Mysql Single Result](./imgs/mysql1.png  "dBug mysql single result")
 
 [↑ Top](#top)
 
@@ -165,6 +172,7 @@ Mysql Results Object
     mysqli_close($dblink);
 ?>
 ```
+![dBug Mysql Multiple Results](./imgs/mysql2.png  "dBug mysql multiple results")
 
 [↑ Top](#top)
 
@@ -187,6 +195,7 @@ Object variable
     new Dbg\dBug2($obj);
 ?>
 ```
+![dBug Object](./imgs/object.png  "dBug object")
 
 [↑ Top](#top)
 
@@ -201,6 +210,7 @@ JSON
     new Dbg\dBug2($json, 'json');
 ?>
 ```
+![dBug json](./imgs/json.png  "dBug json")
 
 [↑ Top](#top)
 
@@ -216,6 +226,7 @@ PostgreSQL resource
     new Dbg\dBug2($res);
 ?>
 ```
+![dBug PostgreSQl](./imgs/postgres.png  "dBug postgre sql")
 
 [↑ Top](#top)
 
@@ -233,6 +244,7 @@ Force type with second parameter 'xml'
     }
 ?>
 ```
+![dBug Xml](./imgs/xml.png  "dBug xml")
 
 [↑ Top](#top)
 
@@ -250,6 +262,9 @@ GD Image resource
     new Dbg\dBug2($image2);
 ?>
 ```
+![dBug GD Resource](./imgs/gd1.png  "dBug gd resource")
+
+![dBug GD Resource](./imgs/gd2.png  "dBug gd resource")
 
 [↑ Top](#top)
 
@@ -267,5 +282,8 @@ Exif Image information
         new Dbg\dBug2($filename2, 'image');
 ?>
 ```
+![dBug Exif Data](./imgs/exif1.png  "dBug exif data")
+
+![dBug Exif Data](./imgs/exif2.png  "dBug exif data")
 
 [↑ Top](#top)
