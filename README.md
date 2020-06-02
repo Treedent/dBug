@@ -38,13 +38,13 @@ dBug is a simple php 7.1+ class to debug PHP variables such as :
 -   [Object](#object)
 -   [JSON](#json)
 -   [XML](#xml)
--   [PostegreSQL resource](#postgres)
+-   [PostegreSQL resource](#postgresql-resource-resource)
 -   [GD Image resource](#gdimage)
 -   [Exif Image information](#exif)
 
 * * * * *
 
-String variable {#string}
+String variable
 ---------------
 
 ``` {.code}
@@ -62,7 +62,7 @@ String variable {#string}
 
 * * * * *
 
-Numeric variable {.numeric}
+Numeric variable
 ----------------
 
 ``` {.code}
