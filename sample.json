@@ -1,0 +1,28 @@
+{
+  "icons": {
+    "200": {
+      "main": "Thunderstorm",
+      "description": "thunderstorm with light rain ",
+      "icon": "cloud_lightning",
+      "number": "11"
+    },
+    "500": {
+      "main": "Rain",
+      "description": "light rain",
+      "icon": "cloud_rain",
+      "number": "10"
+    },
+    "600": {
+      "main": "Snow",
+      "description": "light snow",
+      "icon": "cloud_snow",
+      "number": "13"
+    },
+    "781": {
+      "main": "Tornado",
+      "description": "tornado",
+      "icon": "tornado",
+      "number": "50"
+    }
+  }
+}
