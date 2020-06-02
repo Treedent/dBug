@@ -213,7 +213,7 @@ Force type with second parameter 'json'
     new Dbg\dBug2($json, 'json');
 ?>
 ```
-![dBug json](./imgs/json.png  "dBug json")
+![dBug json](./imgs/json2.png  "dBug json")
 
 [↑ Top](#top)
 
