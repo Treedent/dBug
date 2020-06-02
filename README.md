@@ -42,7 +42,8 @@ dBug is a simple php 7.1+ class to debug PHP variables such as :
 -   [GD Image resource](#gd-image-resource)
 -   [Exif Image information](#exif-image-information)
 
-* * * * *
+
+* * * * * * * * * *
 
 String variable
 ---------------
@@ -62,7 +63,7 @@ String variable
 
 [↑ Top](#top)
 
-* * * * *
+* * * * * * * * * *
 
 Numeric variable
 ----------------
