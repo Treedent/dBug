@@ -187,7 +187,7 @@ Object variable {.object}
 
 * * * * *
 
-JSON {.json}
+JSON {#json}
 ----
 
 ``` {.code}
@@ -201,7 +201,7 @@ JSON {.json}
 
 * * * * *
 
-PostgreSQL resource {.resource}
+PostgreSQL resource {#resource}
 -------------------
 
 ``` {.code}
@@ -216,7 +216,7 @@ PostgreSQL resource {.resource}
 
 * * * * *
 
-XML variable {.xml}
+XML variable {#xml}
 ------------
 
 Force type with second parameter 'xml'
