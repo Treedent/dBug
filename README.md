@@ -47,7 +47,7 @@ dBug is a simple php 7.1+ class to debug PHP variables such as :
 String variable
 ---------------
 
-``` {.code}
+```php
 <?php
     $emptystring = '';
     new Dbg\dBug2($emptystring);
@@ -67,7 +67,7 @@ String variable
 Numeric variable
 ----------------
 
-``` {.code}
+```php
 <?php
     $integerVariable = 3;
     new Dbg\dBug2($integerVariable);
