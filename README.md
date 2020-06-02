@@ -87,7 +87,7 @@ Numeric variable
 Boolean variable
 ----------------
 
-``` {.code}
+```php
 <?php
     $booleanVariableTrue = true;
     new Dbg\dBug2($booleanVariableTrue);
@@ -108,7 +108,7 @@ Boolean variable
 Null variable
 -------------
 
-``` {.code}
+```php
 <?php
     $nullVariable = null;
     new Dbg\dBug2($nullVariable);
@@ -123,7 +123,7 @@ Null variable
 Array variable
 --------------
 
-``` {.code}
+```php
 <?php
     $myArray = [
         'first' => [ ['one'=>1, 'two'=>2], ['three'=>3, 'four'=>4] ],
@@ -141,7 +141,7 @@ Array variable
 Mysql Query Single Result Array
 -------------------------------
 
-``` {.code}
+```php
 <?php
     $dblink = mysqli_connect($host, $user, $pw);
     $dblink->set_charset( 'utf8' );
@@ -161,7 +161,7 @@ Mysql Query Single Result Array
 Mysql Results Object
 --------------------
 
-``` {.code}
+```php
 <?php
     $dblink = mysqli_connect($host, $user, $pw);
     $dblink->set_charset( 'utf8' );
@@ -181,7 +181,7 @@ Mysql Results Object
 Object variable
 ---------------
 
-``` {.code}
+```php
 <?php
     class Foo
     {
@@ -204,7 +204,7 @@ Object variable
 JSON
 ----
 
-``` {.code}
+```php
 <?php
     $json = file_get_contents('./sample.json');
     new Dbg\dBug2($json, 'json');
@@ -219,7 +219,7 @@ JSON
 PostgreSQL resource
 -------------------
 
-``` {.code}
+```php
 <?php
     $conn = pg_pconnect("host=localhost port=5432 dbname=Authenticate user=dbadmin password=pass");
     $res = pg_query($conn, "SELECT id, migration, batch FROM capture.migrations LIMIT 5 OFFSET 1");
@@ -237,7 +237,7 @@ XML variable
 
 Force type with second parameter 'xml'
 
-``` {.code}
+```php
 <?php
     if (file_exists('sample.xml')) {
         new Dbg\dBug2('sample.xml', 'xml');
@@ -253,7 +253,7 @@ Force type with second parameter 'xml'
 GD Image resource
 -----------------
 
-``` {.code}
+```php
 <?php
     $image = imagecreatefrompng('./imgs/brown-hummingbird.png');
     new Dbg\dBug2($image);
@@ -273,7 +273,7 @@ GD Image resource
 Exif Image information
 ----------------------
 
-``` {.code}
+```php
 <?php
         $filename1 = './imgs/charles-deluvio-K4mSJ7kc0As-unsplash.jpg';
         new Dbg\dBug2($filename1, 'image');
