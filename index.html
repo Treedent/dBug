@@ -1,83 +1,102 @@
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html dir="ltr" lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>dBug php debugger</title>
-	<style>
-		body {
-			background-color:#EBFFEB;
-			font-family:Verdana, Arial, Helvetica, sans-serif
-		}
-		code {
-			color: #00c;
-			font-size: 16px
-		}
-		pre.code {
-			background-color: #fff;
-			border-radius: 2px;
-			border: 1px solid #00c;
-			padding: 15px;
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>dBug php debugger</title>
+    <style>
+        body {
+            background-color: #EBFFEB;
+            font-family: Verdana, Arial, Helvetica, sans-serif
+        }
+
+        code {
+            color: #00c;
+            font-size: 16px
+        }
+
+        pre.code {
+            background-color: #fff;
+            border-radius: 2px;
+            border: 1px solid #00c;
+            padding: 15px;
             display: inline-block;
             font-family: "courier new", monospace;
             font-size: 1em;
             min-height: 3em;
             overflow: auto
-		}
-		hr {
-			border: none;
-			height: 1px;
-			background-color: #d7d3db;
-		}
-		.header {
-			color: #090;
-			font-size: 5px
-		}
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #d7d3db;
+        }
+
+        .header {
+            color: #090;
+            font-size: 5px
+        }
+
+        .header2 {
+            color: #090;
+        }
+
         .purple {
             color: #848
         }
+
         .string, .string a {
             color: #FB4
         }
+
         .numeric, .numeric a {
-	        color: #F34
+            color: #F34
         }
+
         .array, .array a {
             color: #090
         }
+
         .object, .object a {
             color: #00c
         }
+
         .xml, .xml a {
             color: #888
         }
+
         .resource, .resource a {
             color: #848
         }
-		.null, .null a {
-			color: #444;
-		}
+
+        .null, .null a {
+            color: #444;
+        }
+
         .boolean, .boolean a {
             color: #7F0;
         }
+
         .json, .json a {
             color: #125;
         }
+
         .top {
             font-size: 1rem;
             color: #333;
             text-decoration: none;
             margin: 10px 30px 20px 600px;
         }
+
         .top:hover {
             color: #666;
         }
 
-	</style>
+    </style>
 </head>
 <body>
-    <pre id="top" class="header">
+<pre class="header" id="top">
             dddddddd                                                         
             d::::::dBBBBBBBBBBBBBBBBB                                         
             d::::::dB::::::::::::::::B                                        
@@ -102,331 +121,518 @@ d::::::ddddd::::::ddBB:::::BBBBBB::::::Bu:::::::::::::::uug:::::::ggggg:::::g
                                                             gg:::::::::::::g  
                                                               ggg::::::ggg    
                                                                  gggggg
-</pre>	<h1>dBug is a simple php 7.1+ class to debug PHP variables such as :</h1>
-	<ul>
-		<li class="string">
-            <a href="#string">String</a>
-        </li>
-		<li class="numeric">
-            <a href="#numeric">Number</a>
-        </li>
-        <li class="boolean">
-            <a href="#boolean">Boolean</a>
-        </li>
-        <li class="null">
-            <a href="#null">Null</a>
-        </li>
-		<li class="array">
-            <a href="#array">Array</a>
-        </li>
-        <li class="mysql1">
-            <a href="#string">Mysql Query Single Result</a>
-        </li>
-        <li class="mysql2">
-            <a href="#string">Mysql Query Multiple Results</a>
-        </li>
-        <li class="object">
-            <a href="#object">Object</a>
-        </li>
-		<li class="json">
-            <a href="#json">JSON</a>
-        </li>
-		<li class="xml">
-            <a href="#xml">XML</a>
-        </li>
-		<li class="resource">
-            <a href="#postgres">PostegreSQL resource</a>
-        </li>
-        <li class="resource">
-            <a href="#gdimage">GD Image resource</a>
-        </li>
-        <li class="array">
-            <a href="#exif">Exif Image information</a>
-        </li>
-	</ul>
+</pre>
+<h1 class="header2">dBug is a simple php 7.1+ class to debug PHP variables such as :</h1>
+<ul>
+    <li class="string">
+        <a href="#string">String</a>
+    </li>
+    <li class="numeric">
+        <a href="#numeric">Number</a>
+    </li>
+    <li class="boolean">
+        <a href="#boolean">Boolean</a>
+    </li>
+    <li class="null">
+        <a href="#null">Null</a>
+    </li>
+    <li class="array">
+        <a href="#array">Array</a>
+    </li>
+    <li class="mysql1">
+        <a href="#string">Mysql Query Single Result</a>
+    </li>
+    <li class="mysql2">
+        <a href="#string">Mysql Query Multiple Results</a>
+    </li>
+    <li class="object">
+        <a href="#object">Object</a>
+    </li>
+    <li class="json">
+        <a href="#json">JSON</a>
+    </li>
+    <li class="xml">
+        <a href="#xml">XML</a>
+    </li>
+    <li class="resource">
+        <a href="#postgres">PostegreSQL resource</a>
+    </li>
+    <li class="resource">
+        <a href="#gdimage">GD Image resource</a>
+    </li>
+    <li class="array">
+        <a href="#exif">Exif Image information</a>
+    </li>
+</ul>
 
-    <!-- String ****************************************************** -->
-    <hr id="string" />
-    <h2 class="string">String variable</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<hr id="usage"/>
+<h2 class="header2">dBug usage</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
+    require_once 'dBug2.php';
+    use SYRADEV\Dbg;
+    //..................
+
+    // dBug any variable within types listed below .
+    new Dbg\dBug2($any_variable);
+
+
+    // forceType could be json, image, mysql, array, object, or xml.
+    new Dbg\dBug2($any_variable, string: $forceType);
+
+
+    // bCollapsed as true will collapse the main dBug table.
+    new Dbg\dBug2($any_variable, string: $forceType, bool: $bCollapsed);
+<span class="purple">?&gt;</span></code></pre>
+
+<!-- String ****************************************************** -->
+<hr id="string"/>
+<h2 class="string">String variable</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $emptystring = '';
     new Dbg\dBug2($emptystring);
 
     $string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     new Dbg\dBug2($string);
 <span class="purple">?&gt;</span></code></pre>
-    			
-			<script>		
-			    window.onload = () => {
-			        const clickableTables = document.querySelectorAll('th.dBug_clickable_table');		        
-					clickableTables.forEach(el => el.addEventListener('click', event => {
-  						dBug_toggleTable(event.target);
-					}));
-			        const clickableRows = document.querySelectorAll('td.dBug_clickable_row');				
-					clickableRows.forEach(el => el.addEventListener('click', event => {
-					    dBug_toggleRow(event.target);
-					}));
-					function dBug_toggleRow(source) {
-						let target = source.parentNode.lastChild;
-						dBug_toggleTarget(target,dBug_toggleSource(source));
-					}
-					function dBug_toggleSource(source) {
-						if (source.style.fontStyle==='italic') {
-							source.style.fontStyle='normal';
-							source.title='click to collapse';
-							return 'open';
-						} else {
-							source.style.fontStyle='italic';
-							source.title='click to expand';
-							return 'closed';
-						}
-					}
-					function dBug_toggleTarget(target,switchToState) {
-						target.style.display = (switchToState==='open') ? '' : 'none';
-					}
-					function dBug_toggleTable(source) {
-					    let switchToState=dBug_toggleSource(source);
-						let table=source.parentNode.parentNode;
-						for (let i=1;i<table.childNodes.length;i++) {
-							let target=table.childNodes[i];
-							if(target.style) {
-								dBug_toggleTarget(target,switchToState);
-							}
-						}
-					}
-				};
-			</script>
-			
-			<style>
-                .red {
-                    color:#F00
-                }				
-				table.dBug_string,
-				table.dBug_numeric,
-				table.dBug_boolean,
-				table.dBug_array,
-				table.dBug_object,
-				table.dBug_json,
-				table.dBug_resource,
-				table.dBug_resourceC,
-				table.dBug_xml { font-family:Verdana, Arial, Helvetica, sans-serif; color:#000; font-size:12px; border-spacing:2px; display:table; border-collapse:separate }
-				.dBug_table { width: auto; border-spacing : 2px; border-collapse : collapse; border: 1px solid #666; margin-bottom: 5px }
-				.dBug_table tr td { padding: 3px; vertical-align: top; line-height:1.3 }
-				.dBug_stringHeader,
-				.dBug_numericHeader,
-				.dBug_booleanHeader,
-				.dBug_arrayHeader,
-				.dBug_objectHeader,
-				.dBug_resourceHeader,
-				.dBug_resourceCHeader,
-				.dBug_xmlHeader { font-weight:bold; color:#fff }
-				.dBug_clickable_table,
-				.dBug_clickable_row { cursor:pointer }	
-				/* String */
-				table.dBug_string { background-color:#FE3 }
-				table.dBug_string td { background-color:#fff }
-				table.dBug_string th.dBug_stringHeader { background-color:#FB4 }
-				/* Null */
-				table.dBug_null td.dBug_nullHeader { color: #fff; background-color:#444 }
-				/* Numeric */
-				table.dBug_numeric { background-color:#F00 }
-				table.dBug_numeric td { background-color:#fff }
-				table.dBug_numeric th.dBug_numericHeader { background-color:#F34 }
-				/* Boolean */
-				table.dBug_boolean { background-color:#4F0 }
-				table.dBug_boolean td { background-color:#fff }
-				table.dBug_boolean th.dBug_booleanHeader { background-color:#7F0 }				
-				/* Array */
-				table.dBug_array { background-color:#060 }
-				table.dBug_array td { background-color:#fff }
-				table.dBug_array th.dBug_arrayHeader { background-color:#090 }
-				table.dBug_array td.dBug_arrayKey { background-color:#cfc }
-				/* Object */
-				table.dBug_object { background-color:#00c }
-				table.dBug_object td { background-color:#fff }
-				table.dBug_object th.dBug_objectHeader { background-color:#44c }
-				table.dBug_object td.dBug_objectKey { background-color:#cdf }
-				/* Json */
-				table.dBug_json { background-color:#125 }
-				table.dBug_json td { background-color:#fff }
-				table.dBug_json th.dBug_jsonHeader { color: #fff; background-color:#125 }
-				table.dBug_json td.dBug_jsonKey { background-color:#cdf }				
-				/* Resource */
-				table.dBug_resource, table.dBug_resourceC { background-color:#848 }
-				table.dBug_resource td, table.dBug_resourceC td { background-color:#fff }
-				table.dBug_resource th.dBug_resourceHeader, table.dBug_resourceC th.dBug_resourceCHeader { background-color:#a6a; }
-				table.dBug_resource td.dBug_resourceKey, table.dBug_resource th.dBug_resourceKey, table.dBug_resourceC td.dBug_resourceCKey, table.dBug_resourceC th.dBug_resourceCKey { background-color:#fdf; }				
-				/* Xml */
-				table.dBug_xml { background-color:#888 }
-				table.dBug_xml td { background-color:#fff }
-				table.dBug_xml th.dBug_xmlHeader { background-color:#aaa }
-				table.dBug_xml td.dBug_xmlKey { background-color:#ddd }
-			</style><table class="dBug_table dBug_string"><tr><th class="dBug_clickable_table dBug_stringHeader">String</th></tr>
-<tr>
-<td> [empty string] </td>
-</tr>
-</table>
-<table class="dBug_table dBug_string"><tr><th class="dBug_clickable_table dBug_stringHeader">String</th></tr>
-<tr>
-<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-</tr>
-<tr>
-<th class="dBug_stringHeader">Lenght: 56</th>
-</tr>
-</table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
 
-    <!-- Numeric ****************************************************** -->
-    <hr id="numeric" />
-    <h2 class="numeric">Numeric variable</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<script>
+    window.onload = () => {
+        const clickableTables = document.querySelectorAll('th.dBug_clickable_table');
+        clickableTables.forEach(el => el.addEventListener('click', event => {
+            dBug_toggleTable(event.target);
+        }));
+        const clickableRows = document.querySelectorAll('td.dBug_clickable_row');
+        clickableRows.forEach(el => el.addEventListener('click', event => {
+            dBug_toggleRow(event.target);
+        }));
+
+        function dBug_toggleRow(source) {
+            let target = source.parentNode.lastChild;
+            dBug_toggleTarget(target, dBug_toggleSource(source));
+        }
+
+        function dBug_toggleSource(source) {
+            if (source.style.fontStyle === 'italic') {
+                source.style.fontStyle = 'normal';
+                source.title = 'click to collapse';
+                return 'open';
+            } else {
+                source.style.fontStyle = 'italic';
+                source.title = 'click to expand';
+                return 'closed';
+            }
+        }
+
+        function dBug_toggleTarget(target, switchToState) {
+            target.style.display = (switchToState === 'open') ? '' : 'none';
+        }
+
+        function dBug_toggleTable(source) {
+            let switchToState = dBug_toggleSource(source);
+            let table = source.parentNode.parentNode;
+            for (let i = 1; i < table.childNodes.length; i++) {
+                let target = table.childNodes[i];
+                if (target.style) {
+                    dBug_toggleTarget(target, switchToState);
+                }
+            }
+        }
+    };
+</script>
+
+<style>
+    .red {
+        color: #F00
+    }
+
+    table.dBug_string,
+    table.dBug_numeric,
+    table.dBug_boolean,
+    table.dBug_array,
+    table.dBug_object,
+    table.dBug_json,
+    table.dBug_resource,
+    table.dBug_resourceC,
+    table.dBug_xml {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        color: #000;
+        font-size: 12px;
+        border-spacing: 2px;
+        display: table;
+        border-collapse: separate
+    }
+
+    .dBug_table {
+        width: auto;
+        border-spacing: 2px;
+        border-collapse: collapse;
+        border: 1px solid #666;
+        margin-bottom: 5px
+    }
+
+    .dBug_table tr td {
+        padding: 3px;
+        vertical-align: top;
+        line-height: 1.3
+    }
+
+    .dBug_stringHeader,
+    .dBug_numericHeader,
+    .dBug_booleanHeader,
+    .dBug_arrayHeader,
+    .dBug_objectHeader,
+    .dBug_resourceHeader,
+    .dBug_resourceCHeader,
+    .dBug_xmlHeader {
+        font-weight: bold;
+        color: #fff
+    }
+
+    .dBug_clickable_table,
+    .dBug_clickable_row {
+        cursor: pointer
+    }
+
+    /* String */
+    table.dBug_string {
+        background-color: #FE3
+    }
+
+    table.dBug_string td {
+        background-color: #fff
+    }
+
+    table.dBug_string th.dBug_stringHeader {
+        background-color: #FB4
+    }
+
+    /* Null */
+    table.dBug_null td.dBug_nullHeader {
+        color: #fff;
+        background-color: #444
+    }
+
+    /* Numeric */
+    table.dBug_numeric {
+        background-color: #F00
+    }
+
+    table.dBug_numeric td {
+        background-color: #fff
+    }
+
+    table.dBug_numeric th.dBug_numericHeader {
+        background-color: #F34
+    }
+
+    /* Boolean */
+    table.dBug_boolean {
+        background-color: #4F0
+    }
+
+    table.dBug_boolean td {
+        background-color: #fff
+    }
+
+    table.dBug_boolean th.dBug_booleanHeader {
+        background-color: #7F0
+    }
+
+    /* Array */
+    table.dBug_array {
+        background-color: #060
+    }
+
+    table.dBug_array td {
+        background-color: #fff
+    }
+
+    table.dBug_array th.dBug_arrayHeader {
+        background-color: #090
+    }
+
+    table.dBug_array td.dBug_arrayKey {
+        background-color: #cfc
+    }
+
+    /* Object */
+    table.dBug_object {
+        background-color: #00c
+    }
+
+    table.dBug_object td {
+        background-color: #fff
+    }
+
+    table.dBug_object th.dBug_objectHeader {
+        background-color: #44c
+    }
+
+    table.dBug_object td.dBug_objectKey {
+        background-color: #cdf
+    }
+
+    /* Json */
+    table.dBug_json {
+        background-color: #125
+    }
+
+    table.dBug_json td {
+        background-color: #fff
+    }
+
+    table.dBug_json th.dBug_jsonHeader {
+        color: #fff;
+        background-color: #125
+    }
+
+    table.dBug_json td.dBug_jsonKey {
+        background-color: #cdf
+    }
+
+    /* Resource */
+    table.dBug_resource, table.dBug_resourceC {
+        background-color: #848
+    }
+
+    table.dBug_resource td, table.dBug_resourceC td {
+        background-color: #fff
+    }
+
+    table.dBug_resource th.dBug_resourceHeader, table.dBug_resourceC th.dBug_resourceCHeader {
+        background-color: #a6a;
+    }
+
+    table.dBug_resource td.dBug_resourceKey, table.dBug_resource th.dBug_resourceKey, table.dBug_resourceC td.dBug_resourceCKey, table.dBug_resourceC th.dBug_resourceCKey {
+        background-color: #fdf;
+    }
+
+    /* Xml */
+    table.dBug_xml {
+        background-color: #888
+    }
+
+    table.dBug_xml td {
+        background-color: #fff
+    }
+
+    table.dBug_xml th.dBug_xmlHeader {
+        background-color: #aaa
+    }
+
+    table.dBug_xml td.dBug_xmlKey {
+        background-color: #ddd
+    }
+</style>
+<table class="dBug_table dBug_string">
+    <tr>
+        <th class="dBug_clickable_table dBug_stringHeader">String</th>
+    </tr>
+    <tr>
+        <td> [empty string]</td>
+    </tr>
+</table>
+<table class="dBug_table dBug_string">
+    <tr>
+        <th class="dBug_clickable_table dBug_stringHeader">String</th>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+    </tr>
+    <tr>
+        <th class="dBug_stringHeader">Lenght: 56</th>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
+
+<!-- Numeric ****************************************************** -->
+<hr id="numeric"/>
+<h2 class="numeric">Numeric variable</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $integerVariable = 3;
     new Dbg\dBug2($integerVariable);
 		    
     $doubleVariable = 3.141592653589793;
     new Dbg\dBug2($doubleVariable);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_numeric">
-<tr>
-<th class="dBug_clickable_table dBug_numericHeader">integer</th>
-</tr>
-<tr>
-<td>3</td>
-</tr>
+<table class="dBug_table dBug_numeric">
+    <tr>
+        <th class="dBug_clickable_table dBug_numericHeader">integer</th>
+    </tr>
+    <tr>
+        <td>3</td>
+    </tr>
 </table>
 <table class="dBug_table dBug_numeric">
-<tr>
-<th class="dBug_clickable_table dBug_numericHeader">double</th>
-</tr>
-<tr>
-<td>3.1415926535898</td>
-</tr>
+    <tr>
+        <th class="dBug_clickable_table dBug_numericHeader">double</th>
+    </tr>
+    <tr>
+        <td>3.1415926535898</td>
+    </tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- Boolean ****************************************************** -->
-    <hr id="boolean" />
-    <h2 class="boolean">Boolean variable</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Boolean ****************************************************** -->
+<hr id="boolean"/>
+<h2 class="boolean">Boolean variable</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $booleanVariableTrue = true;
     new Dbg\dBug2($booleanVariableTrue);
             
     $booleanVariableFalse = false;
     new Dbg\dBug2($booleanVariableFalse);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_boolean">
-<tr>
-<th class="dBug_clickable_table dBug_booleanHeader">Boolean</th>
-</tr>
-<tr>
-<td>TRUE</td>
-</tr>
+<table class="dBug_table dBug_boolean">
+    <tr>
+        <th class="dBug_clickable_table dBug_booleanHeader">Boolean</th>
+    </tr>
+    <tr>
+        <td>TRUE</td>
+    </tr>
 </table>
 <table class="dBug_table dBug_boolean">
-<tr>
-<th class="dBug_clickable_table dBug_booleanHeader">Boolean</th>
-</tr>
-<tr>
-<td>FALSE</td>
-</tr>
+    <tr>
+        <th class="dBug_clickable_table dBug_booleanHeader">Boolean</th>
+    </tr>
+    <tr>
+        <td>FALSE</td>
+    </tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- Null ****************************************************** -->
-    <hr id="null" />
-    <h2 class="null">Null variable</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Null ****************************************************** -->
+<hr id="null"/>
+<h2 class="null">Null variable</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $nullVariable = null;
     new Dbg\dBug2($nullVariable);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_null"><tr><td class="dBug_nullHeader">NULL Variable</td></tr>
-<tr>
+<table class="dBug_table dBug_null">
+    <tr>
+        <td class="dBug_nullHeader">NULL Variable</td>
+    </tr>
+    <tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- Array ****************************************************** -->
-    <hr id="array" />
-    <h2 class="array">Array variable</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Array ****************************************************** -->
+<hr id="array"/>
+<h2 class="array">Array variable</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $myArray = [
         'first' =&gt; [ ['one'=&gt;1, 'two'=&gt;2], ['three'=&gt;3, 'four'=&gt;4] ],
         'second' =&gt; [ [5=&gt;'five', 6=&gt;'six'], [7=&gt;'seven', 8=&gt;'height'] ]
     ];
     new Dbg\dBug2($myArray);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2"> (array)</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">first</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">0</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">one</td>
-				<td>1</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">two</td>
-				<td>2</td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">1</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">three</td>
-				<td>3</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">four</td>
-				<td>4</td></tr>
-</table></td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">second</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">0</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">5</td>
-				<td>five</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">6</td>
-				<td>six</td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">1</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">7</td>
-				<td>seven</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">8</td>
-				<td>height</td></tr>
-</table></td></tr>
-</table></td></tr>
-</table>    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<table class="dBug_table dBug_array">
+    <tr>
+        <th class="dBug_clickable_table dBug_arrayHeader" colspan="2"> (array)</th>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">first</td>
+        <td>
+            <table class="dBug_table dBug_array">
+                <tr>
+                    <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">0</td>
+                    <td>
+                        <table class="dBug_table dBug_array">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">one</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">two</td>
+                                <td>2</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">1</td>
+                    <td>
+                        <table class="dBug_table dBug_array">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">three</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">four</td>
+                                <td>4</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">second</td>
+        <td>
+            <table class="dBug_table dBug_array">
+                <tr>
+                    <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">0</td>
+                    <td>
+                        <table class="dBug_table dBug_array">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">5</td>
+                                <td>five</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">6</td>
+                                <td>six</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">1</td>
+                    <td>
+                        <table class="dBug_table dBug_array">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">7</td>
+                                <td>seven</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">8</td>
+                                <td>height</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- Mysql Query Single Result Array ************************************************* -->
-    <hr id="mysql1" />
-    <h2 class="array">Mysql Query Single Result Array</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Mysql Query Single Result Array ************************************************* -->
+<hr id="mysql1"/>
+<h2 class="array">Mysql Query Single Result Array</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $dblink = mysqli_connect($host, $user, $pw);
     $dblink->set_charset( 'utf8' );
     $dblink->select_db( $db );
@@ -435,55 +641,70 @@ d::::::ddddd::::::ddBB:::::BBBBBB::::::Bu:::::::::::::::uug:::::::ggggg:::::g
     $dbres->free();
     mysqli_close($dblink);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2"> (array)</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">uid</td>
-				<td>5</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">nom</td>
-				<td>Batista</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">prenom</td>
-				<td>Bernardo</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">civilite</td>
-				<td>M</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">email</td>
-				<td>b.batista@riodejaneiro.com</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">adresse</td>
-				<td>Rua da Panificadora, 12</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">photo</td>
-				<td>005.png</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">societe</td>
-				<td>Que Delícia</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">telephone</td>
-				<td>(21) 555-4252</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">mobile</td>
-				<td>(21) 555-4545</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">zip</td>
-				<td>02389-673</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">ville</td>
-				<td>Rio de Janeiro</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">pays</td>
-				<td>29</td></tr>
-</table>    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<table class="dBug_table dBug_array">
+    <tr>
+        <th class="dBug_clickable_table dBug_arrayHeader" colspan="2"> (array)</th>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">uid</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">nom</td>
+        <td>Batista</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">prenom</td>
+        <td>Bernardo</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">civilite</td>
+        <td>M</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">email</td>
+        <td>b.batista@riodejaneiro.com</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">adresse</td>
+        <td>Rua da Panificadora, 12</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">photo</td>
+        <td>005.png</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">societe</td>
+        <td>Que Delícia</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">telephone</td>
+        <td>(21) 555-4252</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">mobile</td>
+        <td>(21) 555-4545</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">zip</td>
+        <td>02389-673</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">ville</td>
+        <td>Rio de Janeiro</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">pays</td>
+        <td>29</td>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- Mysql Results Object ************************************************* -->
-    <hr id="mysql2" />
-    <h2 class="resource">Mysql Results Object</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Mysql Results Object ************************************************* -->
+<hr id="mysql2"/>
+<h2 class="resource">Mysql Results Object</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $dblink = mysqli_connect($host, $user, $pw);
     $dblink->set_charset( 'utf8' );
     $dblink->select_db( $db );
@@ -492,19 +713,91 @@ d::::::ddddd::::::ddBB:::::BBBBBB::::::Bu:::::::::::::::uug:::::::ggggg:::::g
     $dbres->free();
     mysqli_close($dblink);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_resource">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceHeader" colspan="2"> (MySQLi result)</th>
-				</tr><tr><td><table class="dBug_table dBug_resource">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceHeader" colspan="14">DATA</th>
-				</tr><tr><th class="dBug_resourceKey">&nbsp;</th><th class="dBug_resourceKey" title="uid">uid</th><th class="dBug_resourceKey" title="nom">nom</th><th class="dBug_resourceKey" title="prenom">prenom</th><th class="dBug_resourceKey" title="civilite">civilite</th><th class="dBug_resourceKey" title="email">email</th><th class="dBug_resourceKey" title="adresse">adresse</th><th class="dBug_resourceKey" title="photo">photo</th><th class="dBug_resourceKey" title="societe">societe</th><th class="dBug_resourceKey" title="telephone">telephone</th><th class="dBug_resourceKey" title="mobile">mobile</th><th class="dBug_resourceKey" title="zip">zip</th><th class="dBug_resourceKey" title="ville">ville</th><th class="dBug_resourceKey" title="pays">pays</th></tr><tr><td class="dBug_resourceKey">1</td><td title="uid">2</td><td title="nom">Afonso</td><td title="prenom">Pedro</td><td title="civilite">M</td><td title="email">p.afonso@saopaulo.com</td><td title="adresse">Av. dos Lusíadas, 23</td><td title="photo">002.png</td><td title="societe">Comércio Mineiro</td><td title="telephone">(11) 555-7647</td><td title="mobile">[<span class="red">empty string</span>]</td><td title="zip">05432-043</td><td title="ville">São Paulo</td><td title="pays">29</td></tr><tr><td class="dBug_resourceKey">2</td><td title="uid">3</td><td title="nom">Anders</td><td title="prenom">Maria</td><td title="civilite">Mlle</td><td title="email">m.anders@berlin.com</td><td title="adresse">Obere Str. 57</td><td title="photo">003.png</td><td title="societe">Alfreds Futterkiste</td><td title="telephone">030-0074321</td><td title="mobile">030-0076545</td><td title="zip">12209</td><td title="ville">Berlin</td><td title="pays">54</td></tr><tr><td class="dBug_resourceKey">3</td><td title="uid">4</td><td title="nom">Ashworth</td><td title="prenom">Victoria</td><td title="civilite">Mme</td><td title="email">v.ashworth@london.com</td><td title="adresse">Fauntleroy Circus</td><td title="photo">004.png</td><td title="societe">B's Beverages</td><td title="telephone">(171) 555-1212</td><td title="mobile">[<span class="red">empty string</span>]</td><td title="zip">EC2 5NT</td><td title="ville">London</td><td title="pays">74</td></tr></table></td></tr></table>    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<table class="dBug_table dBug_resource">
+    <tr>
+        <th class="dBug_clickable_table dBug_resourceHeader" colspan="2"> (MySQLi result)</th>
+    </tr>
+    <tr>
+        <td>
+            <table class="dBug_table dBug_resource">
+                <tr>
+                    <th class="dBug_clickable_table dBug_resourceHeader" colspan="14">DATA</th>
+                </tr>
+                <tr>
+                    <th class="dBug_resourceKey">&nbsp;</th>
+                    <th class="dBug_resourceKey" title="uid">uid</th>
+                    <th class="dBug_resourceKey" title="nom">nom</th>
+                    <th class="dBug_resourceKey" title="prenom">prenom</th>
+                    <th class="dBug_resourceKey" title="civilite">civilite</th>
+                    <th class="dBug_resourceKey" title="email">email</th>
+                    <th class="dBug_resourceKey" title="adresse">adresse</th>
+                    <th class="dBug_resourceKey" title="photo">photo</th>
+                    <th class="dBug_resourceKey" title="societe">societe</th>
+                    <th class="dBug_resourceKey" title="telephone">telephone</th>
+                    <th class="dBug_resourceKey" title="mobile">mobile</th>
+                    <th class="dBug_resourceKey" title="zip">zip</th>
+                    <th class="dBug_resourceKey" title="ville">ville</th>
+                    <th class="dBug_resourceKey" title="pays">pays</th>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">1</td>
+                    <td title="uid">2</td>
+                    <td title="nom">Afonso</td>
+                    <td title="prenom">Pedro</td>
+                    <td title="civilite">M</td>
+                    <td title="email">p.afonso@saopaulo.com</td>
+                    <td title="adresse">Av. dos Lusíadas, 23</td>
+                    <td title="photo">002.png</td>
+                    <td title="societe">Comércio Mineiro</td>
+                    <td title="telephone">(11) 555-7647</td>
+                    <td title="mobile">[<span class="red">empty string</span>]</td>
+                    <td title="zip">05432-043</td>
+                    <td title="ville">São Paulo</td>
+                    <td title="pays">29</td>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">2</td>
+                    <td title="uid">3</td>
+                    <td title="nom">Anders</td>
+                    <td title="prenom">Maria</td>
+                    <td title="civilite">Mlle</td>
+                    <td title="email">m.anders@berlin.com</td>
+                    <td title="adresse">Obere Str. 57</td>
+                    <td title="photo">003.png</td>
+                    <td title="societe">Alfreds Futterkiste</td>
+                    <td title="telephone">030-0074321</td>
+                    <td title="mobile">030-0076545</td>
+                    <td title="zip">12209</td>
+                    <td title="ville">Berlin</td>
+                    <td title="pays">54</td>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">3</td>
+                    <td title="uid">4</td>
+                    <td title="nom">Ashworth</td>
+                    <td title="prenom">Victoria</td>
+                    <td title="civilite">Mme</td>
+                    <td title="email">v.ashworth@london.com</td>
+                    <td title="adresse">Fauntleroy Circus</td>
+                    <td title="photo">004.png</td>
+                    <td title="societe">B's Beverages</td>
+                    <td title="telephone">(171) 555-1212</td>
+                    <td title="mobile">[<span class="red">empty string</span>]</td>
+                    <td title="zip">EC2 5NT</td>
+                    <td title="ville">London</td>
+                    <td title="pays">74</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- Object *************************************************** -->
-    <hr id="object" />
-    <h2 class="object">Object variable</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Object *************************************************** -->
+<hr id="object"/>
+<h2 class="object">Object variable</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     class Foo
     {
 	    public $bar = 'property1';
@@ -516,433 +809,636 @@ d::::::ddddd::::::ddBB:::::BBBBBB::::::Bu:::::::::::::::uug:::::::ggggg:::::g
     $obj = new Foo();
     new Dbg\dBug2($obj);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_object">
-				<tr>
-					<th  class="dBug_clickable_table dBug_objectHeader" colspan="2"> (object)</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_objectKey">bar</td>
-				<td>property1</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">doe</td>
-				<td>property2</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">method1</td>
-				<td>[function]</td></tr>
-</table>    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<table class="dBug_table dBug_object">
+    <tr>
+        <th class="dBug_clickable_table dBug_objectHeader" colspan="2"> (object)</th>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_objectKey">bar</td>
+        <td>property1</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_objectKey">doe</td>
+        <td>property2</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_objectKey">method1</td>
+        <td>[function]</td>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
 
-    <!-- JSON *************************************************** -->
-    <hr id="json" />
-    <h2 class="json">JSON</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- JSON *************************************************** -->
+<hr id="json"/>
+<h2 class="json">JSON</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $json = file_get_contents('./sample.json');
     new Dbg\dBug2($json, 'json');
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_json">
-				<tr>
-					<th  class="dBug_clickable_table dBug_jsonHeader" colspan="2"> (json)</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_jsonKey">icons</td>
-				<td><table class="dBug_table dBug_object">
-				<tr>
-					<th  class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_objectKey">200</td>
-				<td><table class="dBug_table dBug_object">
-				<tr>
-					<th  class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_objectKey">main</td>
-				<td>Thunderstorm</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">description</td>
-				<td>thunderstorm with light rain </td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">icon</td>
-				<td>cloud_lightning</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">number</td>
-				<td>11</td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">500</td>
-				<td><table class="dBug_table dBug_object">
-				<tr>
-					<th  class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_objectKey">main</td>
-				<td>Rain</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">description</td>
-				<td>light rain</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">icon</td>
-				<td>cloud_rain</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">number</td>
-				<td>10</td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">600</td>
-				<td><table class="dBug_table dBug_object">
-				<tr>
-					<th  class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_objectKey">main</td>
-				<td>Snow</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">description</td>
-				<td>light snow</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">icon</td>
-				<td>cloud_snow</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">number</td>
-				<td>13</td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">781</td>
-				<td><table class="dBug_table dBug_object">
-				<tr>
-					<th  class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_objectKey">main</td>
-				<td>Tornado</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">description</td>
-				<td>tornado</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">icon</td>
-				<td>tornado</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_objectKey">number</td>
-				<td>50</td></tr>
-</table></td></tr>
-</table></td></tr>
-</table>    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<table class="dBug_table dBug_json">
+    <tr>
+        <th class="dBug_clickable_table dBug_jsonHeader" colspan="2"> (json)</th>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_jsonKey">icons</td>
+        <td>
+            <table class="dBug_table dBug_object">
+                <tr>
+                    <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_objectKey">200</td>
+                    <td>
+                        <table class="dBug_table dBug_object">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">main</td>
+                                <td>Thunderstorm</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">description</td>
+                                <td>thunderstorm with light rain</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">icon</td>
+                                <td>cloud_lightning</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">number</td>
+                                <td>11</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_objectKey">500</td>
+                    <td>
+                        <table class="dBug_table dBug_object">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">main</td>
+                                <td>Rain</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">description</td>
+                                <td>light rain</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">icon</td>
+                                <td>cloud_rain</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">number</td>
+                                <td>10</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_objectKey">600</td>
+                    <td>
+                        <table class="dBug_table dBug_array">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">0</td>
+                                <td>
+                                    <table class="dBug_table dBug_object">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_objectKey">main</td>
+                                            <td>Snow</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">1</td>
+                                <td>
+                                    <table class="dBug_table dBug_object">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_objectKey">description</td>
+                                            <td>light snow</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">2</td>
+                                <td>
+                                    <table class="dBug_table dBug_object">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_objectKey">icon</td>
+                                            <td>cloud_snow</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_arrayKey">3</td>
+                                <td>
+                                    <table class="dBug_table dBug_object">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_objectKey">number</td>
+                                            <td>13</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_objectKey">781</td>
+                    <td>
+                        <table class="dBug_table dBug_object">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_objectHeader" colspan="2">object</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">main</td>
+                                <td>Tornado</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">description</td>
+                                <td>tornado</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">icon</td>
+                                <td>tornado</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_objectKey">number</td>
+                                <td>50</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
-    <!-- PostgreSQL resource ****************************************************** -->
-    <hr id="postgres" />
-    <h2 class="resource">PostgreSQL resource</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- PostgreSQL resource ****************************************************** -->
+<hr id="postgres"/>
+<h2 class="resource">PostgreSQL resource</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $conn = pg_pconnect(&quot;host=localhost port=5432 dbname=Authenticate user=dbadmin password=pass&quot;);
-    $res = pg_query($conn, &quot;SELECT id, migration, batch FROM capture.migrations LIMIT 5 OFFSET 1&quot;);
+    $res = pg_query($conn, &quot;SELECT id, migration, batch FROM public.migrations LIMIT 5 OFFSET 1&quot;);
     new Dbg\dBug2($res);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_resourceC">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceCHeader" colspan="1"> (resource)</th>
-				</tr><tr>
-<td>
-<table class="dBug_table dBug_resource">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceHeader" colspan="4">PostgreSQL result</th>
-				</tr><tr><td class="dBug_resourceKey">&nbsp;</td><th class="dBug_resourceKey" title="int4 ">id </th><th class="dBug_resourceKey" title="varchar ">migration </th><th class="dBug_resourceKey" title="int4 ">batch </th></tr><tr>
-<td class="dBug_resourceKey">1</td><td>2</td>
-<td>2020_03_11_145556_create_sources_table</td>
-<td>1</td>
-</tr>
-<tr>
-<td class="dBug_resourceKey">2</td><td>3</td>
-<td>2020_03_11_145623_create_feeds_table</td>
-<td>1</td>
-</tr>
-<tr>
-<td class="dBug_resourceKey">3</td><td>4</td>
-<td>2020_03_13_110437_create_articles_table</td>
-<td>1</td>
-</tr>
-<tr>
-<td class="dBug_resourceKey">4</td><td>5</td>
-<td>2020_03_18_141142_create_authors_table</td>
-<td>1</td>
-</tr>
-<tr>
-<td class="dBug_resourceKey">5</td><td>6</td>
-<td>2020_03_25_075450_add_fields_to_articles_table</td>
-<td>1</td>
-</tr>
-</table></td></tr>
+<table class="dBug_table dBug_resourceC">
+    <tr>
+        <th class="dBug_clickable_table dBug_resourceCHeader" colspan="1"> (resource)</th>
+    </tr>
+    <tr>
+        <td>
+            <table class="dBug_table dBug_resource">
+                <tr>
+                    <th class="dBug_clickable_table dBug_resourceHeader" colspan="4">PostgreSQL result</th>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">&nbsp;</td>
+                    <th class="dBug_resourceKey" title="int4 ">id</th>
+                    <th class="dBug_resourceKey" title="varchar ">migration</th>
+                    <th class="dBug_resourceKey" title="int4 ">batch</th>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">1</td>
+                    <td>2</td>
+                    <td>2020_03_11_145556_create_sources_table</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">2</td>
+                    <td>3</td>
+                    <td>2020_03_11_145623_create_feeds_table</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">3</td>
+                    <td>4</td>
+                    <td>2020_03_13_110437_create_articles_table</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">4</td>
+                    <td>5</td>
+                    <td>2020_03_18_141142_create_authors_table</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td class="dBug_resourceKey">5</td>
+                    <td>6</td>
+                    <td>2020_03_25_075450_add_fields_to_articles_table</td>
+                    <td>1</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
-    <!-- XML ****************************************************** -->
-    <hr id="xml" />
-	<h2 class="xml">XML variable</h2>
-    <p>Force type with second parameter 'xml'</p>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- XML ****************************************************** -->
+<hr id="xml"/>
+<h2 class="xml">XML variable</h2>
+<p>Force type with second parameter 'xml'</p>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     if (file_exists('sample.xml')) {
         new Dbg\dBug2('sample.xml', 'xml');
     }
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2"> (xml document)</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlRoot</td>
-				<td><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>catalog</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>    Lorem ipsum dolor sit amet.        </td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td> Consectetur adipiscing elit </td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>book</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">id</td>
-				<td>595</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">ref</td>
-				<td>ISBN-556232545</td></tr>
-</table></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>        Lorem ipsum dolor sit amet.                </td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td> Consectetur adipiscing elit </td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>author</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>Gambardella, Matthew</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td></td></tr>
-</table><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>title</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>XML Developer's Guide</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td></td></tr>
-</table><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>genre</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>Computer</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td></td></tr>
-</table><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>price</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>44.95</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td></td></tr>
-</table><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>publish_date</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>2000-10-01</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td></td></tr>
-</table><table class="dBug_table dBug_xml">
-				<tr>
-					<th  class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
-				<td><strong>description</strong></td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
-				<td>An in-depth look at creating applications with XML.</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
-				<td>&nbsp;</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
-				<td></td></tr>
-</table></td></tr>
-</table></td></tr>
-</table></td></tr>
+<table class="dBug_table dBug_xml">
+    <tr>
+        <th class="dBug_clickable_table dBug_xmlHeader" colspan="2"> (xml document)</th>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_xmlKey">xmlRoot</td>
+        <td>
+            <table class="dBug_table dBug_xml">
+                <tr>
+                    <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                    <td><strong>catalog</strong></td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                    <td> Lorem ipsum dolor sit amet.</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                    <td> Consectetur adipiscing elit</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                    <td>
+                        <table class="dBug_table dBug_xml">
+                            <tr>
+                                <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                <td><strong>book</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                <td>
+                                    <table class="dBug_table dBug_array">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_arrayKey">id</td>
+                                            <td>595</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_arrayKey">ref</td>
+                                            <td>ISBN-556232545</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                <td> Lorem ipsum dolor sit amet.</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                <td> Consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                                <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                <td>
+                                    <table class="dBug_table dBug_xml">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                            <td><strong>author</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                            <td>Gambardella, Matthew</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="dBug_table dBug_xml">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                            <td><strong>title</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                            <td>XML Developer's Guide</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="dBug_table dBug_xml">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                            <td><strong>genre</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                            <td>Computer</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="dBug_table dBug_xml">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                            <td><strong>price</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                            <td>44.95</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="dBug_table dBug_xml">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                            <td><strong>publish_date</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                            <td>2000-10-01</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="dBug_table dBug_xml">
+                                        <tr>
+                                            <th class="dBug_clickable_table dBug_xmlHeader" colspan="2">xml element</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlName</td>
+                                            <td><strong>description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlAttributes</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlText</td>
+                                            <td>An in-depth look at creating applications with XML.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlComment</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dBug_clickable_row dBug_xmlKey">xmlChildren</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
-    <!-- GD Image resource ****************************************************** -->
-    <hr id="gdimage" />
-    <h2 class="resource">GD Image resource</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- GD Image resource ****************************************************** -->
+<hr id="gdimage"/>
+<h2 class="resource">GD Image resource</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
     $image = imagecreatefrompng('./imgs/brown-hummingbird.png');
     new Dbg\dBug2($image);
 
     $image2 = imagecreatefromgif('./imgs/cat.gif');
     new Dbg\dBug2($image2);
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_resourceC">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceCHeader" colspan="1"> (resource)</th>
-				</tr><tr>
-<td>
-<table class="dBug_table dBug_resource">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceHeader" colspan="2">gd</th>
-				</tr><tr><td colspan="2"><img alt="img" src="./imgs/tmp/image-5ed6b91bc87df.jpg"></td></tr><tr>
-				<td class="dBug_clickable_row dBug_resourceKey">Width</td>
-				<td>1000</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_resourceKey">Height</td>
-				<td>668</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_resourceKey">Colors</td>
-				<td>TrueColor</table></td></tr>
+<table class="dBug_table dBug_resourceC">
+    <tr>
+        <th class="dBug_clickable_table dBug_resourceCHeader" colspan="1"> (resource)</th>
+    </tr>
+    <tr>
+        <td>
+            <table class="dBug_table dBug_resource">
+                <tr>
+                    <th class="dBug_clickable_table dBug_resourceHeader" colspan="2">gd</th>
+                </tr>
+                <tr>
+                    <td colspan="2"><img alt="img" src="./imgs/tmp/image-5ed6b91bc87df.jpg"></td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_resourceKey">Width</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_resourceKey">Height</td>
+                    <td>668</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_resourceKey">Colors</td>
+                    <td>TrueColor
+            </table>
+        </td>
+    </tr>
 </table>
 <table class="dBug_table dBug_resourceC">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceCHeader" colspan="1"> (resource)</th>
-				</tr><tr>
-<td>
-<table class="dBug_table dBug_resource">
-				<tr>
-					<th  class="dBug_clickable_table dBug_resourceHeader" colspan="2">gd</th>
-				</tr><tr><td colspan="2"><img alt="img" src="./imgs/tmp/image-5ed6b91bcaf65.jpg"></td></tr><tr>
-				<td class="dBug_clickable_row dBug_resourceKey">Width</td>
-				<td>500</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_resourceKey">Height</td>
-				<td>281</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_resourceKey">Colors</td>
-				<td>59</td></tr>
-</table></td></tr>
+    <tr>
+        <th class="dBug_clickable_table dBug_resourceCHeader" colspan="1"> (resource)</th>
+    </tr>
+    <tr>
+        <td>
+            <table class="dBug_table dBug_resource">
+                <tr>
+                    <th class="dBug_clickable_table dBug_resourceHeader" colspan="2">gd</th>
+                </tr>
+                <tr>
+                    <td colspan="2"><img alt="img" src="./imgs/tmp/image-5ed6b91bcaf65.jpg"></td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_resourceKey">Width</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_resourceKey">Height</td>
+                    <td>281</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_resourceKey">Colors</td>
+                    <td>59</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 
-    <!-- Exif Image information ****************************************************** -->
-    <hr id="exif" />
-    <h2 class="array">Exif Image information</h2>
-    <pre class="code"><code><span class="purple">&lt;?php</span>
+<!-- Exif Image information ****************************************************** -->
+<hr id="exif"/>
+<h2 class="array">Exif Image information</h2>
+<pre class="code"><code><span class="purple">&lt;?php</span>
         $filename1 = './imgs/charles-deluvio-K4mSJ7kc0As-unsplash.jpg';
         new Dbg\dBug2($filename1, 'image');
 
         $filename2 = './imgs/cat.gif';
         new Dbg\dBug2($filename2, 'image');
 <span class="purple">?&gt;</span></code></pre>
-    <table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2"> (array)</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">FileName</td>
-				<td>charles-deluvio-K4mSJ7kc0As-unsplash.jpg</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">FileDateTime</td>
-				<td>1591121221</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">FileSize</td>
-				<td>1353399</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">FileType</td>
-				<td>2</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">MimeType</td>
-				<td>image/jpeg</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">SectionsFound</td>
-				<td>[empty string]</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">COMPUTED</td>
-				<td><table class="dBug_table dBug_array">
-				<tr>
-					<th  class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
-				</tr><tr>
-				<td class="dBug_clickable_row dBug_arrayKey">html</td>
-				<td>width="2776" height="3866"</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">Height</td>
-				<td>3866</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">Width</td>
-				<td>2776</td></tr>
-<tr>
-				<td class="dBug_clickable_row dBug_arrayKey">IsColor</td>
-				<td>1</td></tr>
-</table></td></tr>
-</table><table class="dBug_table dBug_string"><tr><th class="dBug_clickable_table dBug_stringHeader">String</th></tr>
-<tr>
-<td>./imgs/cat.gif : No exif support for this image format!</td>
-</tr>
-<tr>
-<th class="dBug_stringHeader">Lenght: 55</th>
-</tr>
+<table class="dBug_table dBug_array">
+    <tr>
+        <th class="dBug_clickable_table dBug_arrayHeader" colspan="2"> (array)</th>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">FileName</td>
+        <td>charles-deluvio-K4mSJ7kc0As-unsplash.jpg</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">FileDateTime</td>
+        <td>1591121221</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">FileSize</td>
+        <td>1353399</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">FileType</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">MimeType</td>
+        <td>image/jpeg</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">SectionsFound</td>
+        <td>[empty string]</td>
+    </tr>
+    <tr>
+        <td class="dBug_clickable_row dBug_arrayKey">COMPUTED</td>
+        <td>
+            <table class="dBug_table dBug_array">
+                <tr>
+                    <th class="dBug_clickable_table dBug_arrayHeader" colspan="2">array</th>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">html</td>
+                    <td>width="2776" height="3866"</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">Height</td>
+                    <td>3866</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">Width</td>
+                    <td>2776</td>
+                </tr>
+                <tr>
+                    <td class="dBug_clickable_row dBug_arrayKey">IsColor</td>
+                    <td>1</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
-    <a href="#top" class="top">&uarr;&nbsp;Top</a>
+<table class="dBug_table dBug_string">
+    <tr>
+        <th class="dBug_clickable_table dBug_stringHeader">String</th>
+    </tr>
+    <tr>
+        <td>./imgs/cat.gif : No exif support for this image format!</td>
+    </tr>
+    <tr>
+        <th class="dBug_stringHeader">Lenght: 55</th>
+    </tr>
+</table>
+<a class="top" href="#top">&uarr;&nbsp;Top</a>
 </body>
 </html>
