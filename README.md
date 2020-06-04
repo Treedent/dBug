@@ -55,10 +55,10 @@ dBug is a simple php 7.1+ class to debug PHP variables such as :
     new Dbg\dBug2($any_variable);
 
     // forceType could be json, image, mysql, array, object, or xml.
-    new Dbg\dBug2($any_variable, string $forceType);
+    new Dbg\dBug2($any_variable, string: $forceType);
 
-    // bCollapsed as true will collapse the main dBug table.
-    new Dbg\dBug2($any_variable, string $forceType, bool $bCollapsed);
+    // bCollapsed as true will collapse :the main dBug table.
+    new Dbg\dBug2($any_variable, string: $forceType, bool: $bCollapsed);
 ?>
 ```
 * * * * * * * * * *
