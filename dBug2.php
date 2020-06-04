@@ -106,6 +106,10 @@ class dBug2 {
 	private function getVariableName() {
 		$arrBacktrace = debug_backtrace();
 
+		echo '<pre>';
+		var_dump($arrBacktrace);
+		echo '</pre>';
+
 		// Possible 'included' functions
 		$arrInclude = [ 'include', 'include_once', 'require', 'require_once' ];
 		
@@ -140,7 +144,7 @@ class dBug2 {
 	 */
 	private function makeTableHeader($type,$header,$colspan=2): void {
 		if(!$this->bInitialized) {
-			$header = $this->getVariableName() . ' (' . $header . ')';
+			$header = ' (' . $header . ') ';
 			$this->bInitialized = true;
 		}
 		$str_i = ($this->bCollapsed) ? 'style="font-style:italic" ' : '';
